@@ -25,7 +25,7 @@ class Robot(object):
         Reset the robot
         """
         self.state = self.sense_state()
-        self.create_Qtable(self.state)
+        self.create_Qtable_line(self.state)
 
     def set_status(self, learning=False, testing=False):
         """
@@ -57,13 +57,15 @@ class Robot(object):
         # TODO 3. Return robot's current state
         return None
 
-    def create_Qtable(self, state):
+    def create_Qtable_line(self, state):
         """
         Create the qtable with the current state
         """
         # TODO 4. Create qtable with current state
         # Our qtable should be a two level dict,
         # Qtable[state] ={'u':xx, 'd':xx, ...}
+        # If Qtable[state] already exits, then do
+        # not change it.
         pass
 
     def choose_action(self):
@@ -104,17 +106,17 @@ class Robot(object):
         Called every time in every epoch in training or testing.
         Return current action and reward.
         """
-        self.state = self.sense_state()
-        self.create_Qtable(self.state)
+        self.state = self.sense_state() # Get the current state
+        self.create_Qtable(self.state) # For the state, create q table line
 
-        action = self.choose_action()
-        reward = self.maze.move_robot(action)
+        action = self.choose_action() # choose action for this state
+        reward = self.maze.move_robot(action) # move robot for given action
 
-        next_state = self.sense_state()
-        self.create_Qtable(next_state)
+        next_state = self.sense_state() # get next state
+        self.create_Qtable_line(next_state) # create q table line for next state
 
         if self.learning and not self.testing:
-            self.update_Qtable(reward, action, next_state)
-            self.update_parameter()
+            self.update_Qtable(reward, action, next_state) # update q table
+            self.update_parameter() # update parameters
 
         return action, reward
