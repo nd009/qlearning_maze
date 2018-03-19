@@ -107,7 +107,7 @@ class Robot(object):
         Return current action and reward.
         """
         self.state = self.sense_state() # Get the current state
-        self.create_Qtable(self.state) # For the state, create q table line
+        self.create_Qtable_line(self.state) # For the state, create q table line
 
         action = self.choose_action() # choose action for this state
         reward = self.maze.move_robot(action) # move robot for given action
