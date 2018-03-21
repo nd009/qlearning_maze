@@ -22,6 +22,6 @@ conda env create -f environment.yml
 ```
 安装完毕后，在命令行/终端中运行 `source activate robot-env`（Mac/Linux 系统）或 `activate robot-env`（Windows 系统）激活该环境。
 
-2. 阅读 `main.ipynb` 中的指导完成项目，并根据指导修改对应的代码，生成、观察结果。
+2. 阅读 `robot_maze.ipynb` 中的指导完成项目，并根据指导修改对应的代码，生成、观察结果。
 3. 导出代码与报告，上传文件，提交审阅并优化。
 
