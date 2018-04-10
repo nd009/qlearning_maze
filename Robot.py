@@ -97,7 +97,7 @@ class Robot(object):
         """
         if self.learning:
             pass
-            # TODO 8. When learning, update the q table accriding
+            # TODO 8. When learning, update the q table according
             # to the given rules
 
     def update(self):
