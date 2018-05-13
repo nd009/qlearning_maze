@@ -241,7 +241,7 @@ class Maze(object):
         if self.is_permissible(self.robot['loc'],direction):
             self.robot['loc'] = tuple((i+di for i,di in zip(self.robot['loc'],self.move_map[direction])))
             self.robot['dir'] = direction
-            if self.robot['loc'] in self.destination:
+            if self.robot['loc'] == self.destination:
                 reward = self.reward['destination']
             elif self.robot['loc'] in self.__traps:
                 reward = self.reward['trap']
