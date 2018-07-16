@@ -166,16 +166,13 @@ class Runner(object):
         #     with tqdm.tqdm(pool.imap(ensemble_image, runner.train_robot_record.keys()),
         #                    total=len(runner.train_robot_record.keys()), desc="Generating Images") as pbar:
         #         res = list(pbar)
-
-        res = []
-        with tqdm.tqdm(self.train_robot_record.keys(), desc="Generating Images") as pbar:
-            for key in pbar:
-                res.append(ensemble_image(key))
-
-        height, width, _ = res[0][1].shape
+        
+        height, width, _ = ensemble_image((0,0))[1].shape
         writer = cv2.VideoWriter(filename, cv2.VideoWriter_fourcc(*"XVID"), 10.0, (width//2,height//2))
-        with tqdm.tqdm(sorted(res), desc="Generate Movies") as pbar:
-            for (key,img) in pbar:
+
+        with tqdm.tqdm(self.train_robot_record.keys(), desc="Generate Movies") as pbar:
+            for key in pbar:
+                _, img = ensemble_image(key)
                 writer.write(cv2.resize(img[:,:,::-1],(width//2,height//2)))
 
         writer.release()
