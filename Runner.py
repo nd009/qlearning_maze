@@ -170,7 +170,7 @@ class Runner(object):
         height, width, _ = ensemble_image((0,0))[1].shape
         writer = cv2.VideoWriter(filename, cv2.VideoWriter_fourcc(*"XVID"), 10.0, (width//2,height//2))
 
-        with tqdm.tqdm(self.train_robot_record.keys(), desc="Generate Movies") as pbar:
+        with tqdm.tqdm(sorted(self.train_robot_record.keys()), desc="Generate Movies") as pbar:
             for key in pbar:
                 _, img = ensemble_image(key)
                 writer.write(cv2.resize(img[:,:,::-1],(width//2,height//2)))
